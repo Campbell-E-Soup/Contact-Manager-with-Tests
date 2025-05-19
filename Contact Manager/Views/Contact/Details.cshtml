@@ -1,0 +1,47 @@
+﻿@model Contact;
+@{
+	ViewData["Title"] = "Contact Details";
+	Layout = "_Layout";
+}
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td>
+				<label class="me-3">Name:</label> 
+				<label>@($"{Model.FirstName} {Model.LastName}")</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="me-3">Phone:</label> 
+				<label>@String.Format("{0:(###) ###-####}", Model.Phone)</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="me-3">Email:</label> 
+				<label>@Model.Email</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="me-3">Category:</label> 
+				<label>@ViewBag.CategoryName</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="me-3">Date added:</label> 
+				<label>@Model.DateCreated()</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a asp-controller="Contact" asp-action="Edit" asp-route-id=@Model.ContactID class="btn btn-dark" asp-route-slug=@Model.Slug>Edit</a>
+				<a asp-controller="Contact" asp-action="Delete" asp-route-id=@Model.ContactID class="btn btn-dark" asp-route-slug=@Model.Slug>Delete</a>
+				<a asp-controller="Home" asp-action="Index" class="btn btn-dark">Home</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

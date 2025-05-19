@@ -1,0 +1,39 @@
+﻿@model List<Contact>;
+@{
+    ViewData["Title"] = "Contacts";
+    Layout = "_Layout";
+}
+<div>
+    <a asp-controller="Contact" asp-action="Add">Add Contact</a>
+</div>
+
+<table class="table">
+    <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Category</th>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Contact" asp-action="Details" asp-route-id=@contact.ContactID asp-route-slug=@contact.Slug>@contact.FirstName</a>
+                </td>
+                <td>
+                    <a asp-controller="Contact" asp-action="Details" asp-route-id=@contact.ContactID asp-route-slug=@contact.Slug>@contact.LastName</a>
+                </td>
+                    <td>@String.Format("{0:(###) ###-####}", contact.Phone)</td>
+                <td>@contact.Email</td>
+                @if (contact.Category != null)
+                {
+                    <td>
+                        @contact.Category.Name
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
